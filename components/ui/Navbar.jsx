@@ -7,10 +7,10 @@ import { Card } from "@/components/ui/card"
 
 export default function Navbar() {
   return (
-    <header className="flex items-center justify-between px-4 py-2 bg-gray-800 text-white">
+    <header className="flex items-center justify-between px-4 py-2 bg-black text-slate-200">
     <div className="flex items-center space-x-2">
-      <Popcorn className="h-6 w-6" />
-      <span className="text-lg font-semibold">Popcorn Time</span>
+      <Popcorn className="h-6 w-6 text-red-500" />
+      <span className="text-lg font-semibold text-red-500">Popcorn Time</span>
     </div>
     <nav className="space-x-4 hidden lg:block">
       <Link className="text-sm font-medium" href="#">
