@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import Navbar from '@/components/ui/Navbar'
 import { Popcorn } from 'lucide-react';
 import Footer from '@/components/ui/Footer'
+import NextImage from "next/image";
 import {
   Modal, 
   ModalContent, 
@@ -108,24 +109,27 @@ export default function Home({}) {
         <div className="container px-4 md:px-6 lg:px-8">
           <h1 className="text-2xl font-bold text-slate-200 mb-6">Most Popular</h1>
           <h2 className="text-md font-bold text-slate-200 mb-6">You are viewing page {currentPage}</h2>
-          <div className="grid gap-6  xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 ">    
+          <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 ">    
   {movies.map((movie, index) => (
     <Card
-          className="border-none bg-black "
+          className="border-none bg-black"
           key={index}
           isPressable onPress={() => handleMovieClick(movie)}>
         
       
-        {/* <Skeleton isLoaded={isLoaded} className="rounded-lg"> */}
+      
       {/* <div className="relative pb-[150%]"> */}
       <div className="relative">
-      <CardBody className="overflow-visible p-0">
+      <CardBody className="overflow-visible">
             <Image
+            isZoomed
               shadow="sm"
               radius="lg"
               width="100%"
+              // width="500"
+              // height="100"
               alt={movie.title}
-              // className="w-full object-cover h-[140px]"
+              // className="w-full object-cover"
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             />
           </CardBody>
@@ -141,9 +145,8 @@ export default function Home({}) {
            // Handle movie click
         /> */}
       </div>
-      {/* </Skeleton> */}
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-slate-50">{movie.title}</h2> {/* Display movie title */}
+        <h2 className="text-lg font-semibold text-center text-slate-50">{movie.title}</h2> {/* Display movie title */}
         
         <Badge className="mt-2 bg-slate-900 text-slate-200">{movie.release_date}</Badge> {/* Display release date */}
       </div>
