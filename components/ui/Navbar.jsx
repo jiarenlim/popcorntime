@@ -37,7 +37,7 @@ export default function Navbar1() {
   //     Sign In
   //   </Button>
   // </header>
-  <Navbar className="bg-black text-white" onMenuOpenChange={setIsMenuOpen} >
+  <Navbar shouldHideOnScroll isBlurred className="bg-black text-white" onMenuOpenChange={setIsMenuOpen} >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
