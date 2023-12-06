@@ -29,6 +29,7 @@ export default function Home({}) {
   const [totalPages, setTotalPages] = useState(1); // State to hold total pages
   const totalMovies = 10000; // Total number of movies
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const toggleLoad = () => {
   //   setIsLoaded(!isLoaded);
   // };
@@ -91,6 +92,8 @@ export default function Home({}) {
   
     const selectedPageMovies = await fetchMovies(page);
     setMovies(selectedPageMovies.slice(startIndex, endIndex));
+  // Scroll to the top of the page after pagination click
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   
 
@@ -108,7 +111,9 @@ export default function Home({}) {
           <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 ">    
   {movies.map((movie, index) => (
     <Card
-          className="border-none bg-black"
+    className=" border-none bg-black"
+          // className="border-none bg-gradient-to-b from-red-800 to-black"
+          // className=" border-none bg-gradient-to-t  from-black  to-red-700"
           key={index}
           isPressable onPress={() => handleMovieClick(movie)}>
         
@@ -142,7 +147,7 @@ export default function Home({}) {
         /> */}
       </div>
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-center text-slate-50">{movie.title}</h2> {/* Display movie title */}
+        <h2 className="text-lg font-semibold  text-slate-50">{movie.title}</h2> {/* Display movie title */}
         
         <Badge className="mt-2 bg-slate-900 text-slate-200">{movie.release_date}</Badge> {/* Display release date */}
       </div>
