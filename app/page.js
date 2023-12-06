@@ -6,13 +6,7 @@ import Navbar from '@/components/ui/Navbar'
 import { Popcorn } from 'lucide-react';
 import Footer from '@/components/ui/Footer'
 import NextImage from "next/image";
-import {
-  Modal, 
-  ModalContent, 
-  ModalHeader, 
-  ModalBody, 
-  ModalFooter
-} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import {Skeleton} from "@nextui-org/react";
 import {
   HoverCard,
@@ -21,9 +15,9 @@ import {
 } from "@/components/ui/hover-card"
 // import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 import { fetchMovies } from './action'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import {Pagination, PaginationItem, PaginationCursor} from "@nextui-org/react";
-import {Card, CardHeader, CardBody, CardFooter,Image, Button} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, CardFooter,Image} from "@nextui-org/react";
 import MovieModal from '@/components/ui/MovieModal';
 export default function Home({}) {
   const [movies, setMovies] = useState([]);
@@ -34,22 +28,22 @@ export default function Home({}) {
   const moviesPerPage = 30; // Number of movies per page
   const [totalPages, setTotalPages] = useState(1); // State to hold total pages
   const totalMovies = 10000; // Total number of movies
-
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
   // const toggleLoad = () => {
   //   setIsLoaded(!isLoaded);
   // };
+  // const [selectedMovie, setSelectedMovie] = useState(null);
+
+  // const handleMovieClick = (movie) => {
+  //   setSelectedMovie(movie);
+  // };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
 
   const handleMovieClick = (movie) => {
     setSelectedMovie(movie);
-    // Show your modal here
-    // For example, if you have a state for modal visibility like `showModal`:
-    // setShowModal(true);
-    // {selectedMovie && (
-    //   <MovieModal
-    //     movie={selectedMovie}
-    //     onClose={handleCloseModal}
-    //   />
-    // )}
     console.log(`${movie.title} clicked!`);
   };
 
@@ -101,6 +95,8 @@ export default function Home({}) {
   
 
   return (
+   
+    
     <div>
     <Navbar/>
     
@@ -108,7 +104,7 @@ export default function Home({}) {
       <main className="flex-1 bg-[#141414] py-8">
         <div className="container px-4 md:px-6 lg:px-8">
           <h1 className="text-2xl font-bold text-slate-200 mb-6">Most Popular</h1>
-          <h2 className="text-md font-bold text-slate-200 mb-6">You are viewing page {currentPage}</h2>
+          <h2 className="text-sm font-bold text-slate-500 mb-6">You are viewing page {currentPage} out of {totalPages} </h2>
           <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 ">    
   {movies.map((movie, index) => (
     <Card
@@ -152,14 +148,21 @@ export default function Home({}) {
       </div>
       
     </Card>
+    
   ))}
+    <MovieModal
+        movie={selectedMovie}
+        onClose={handleCloseModal}
+      />
 </div>
 
-
+<div className="flex justify-center">
 <Pagination color="danger"
             total={totalPages}
             current={currentPage}
             onChange={handlePageChange}
+            showShadow
+            // showControls
             // Add other pagination items as needed
             classNames={{
               wrapper: "mt-8 gap-0 overflow-visible rounded border border-divider hover:bg-transparent",
@@ -168,6 +171,7 @@ export default function Home({}) {
                 "mt-8 bg-red-600  text-white font-bold ",
             }}
           />
+          </div>
         </div>
       </main>
       <Footer/>
