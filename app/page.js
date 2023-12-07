@@ -106,10 +106,11 @@ export default function Home({}) {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 bg-[#141414] py-8">
         <div className="container px-4 md:px-6 lg:px-8">
-          {/* <div className='flex'> */}
-          <h1 className="text-2xl font-bold text-slate-200 mb-6 ">Most Popular</h1>
-          {/* <h1 className="text-2xl font-bold text-slate-200 mb-6 ">Genres</h1> */}
-          {/* </div> */}
+        <div className="flex justify-between">
+  <h1 className="text-2xl font-bold text-slate-200 mb-6">Most Popular</h1>
+  <h1 className="text-2xl font-bold text-slate-200 mb-6 mr-5">Genres</h1>
+</div>
+
           <h2 className="text-sm font-bold text-slate-500 mb-6">You are viewing page {currentPage} out of {totalPages} </h2>
           <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 ">    
   {movies.map((movie, index) => (
