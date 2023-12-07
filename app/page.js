@@ -106,7 +106,10 @@ export default function Home({}) {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 bg-[#141414] py-8">
         <div className="container px-4 md:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-slate-200 mb-6">Most Popular</h1>
+          {/* <div className='flex'> */}
+          <h1 className="text-2xl font-bold text-slate-200 mb-6 ">Most Popular</h1>
+          {/* <h1 className="text-2xl font-bold text-slate-200 mb-6 ">Genres</h1> */}
+          {/* </div> */}
           <h2 className="text-sm font-bold text-slate-500 mb-6">You are viewing page {currentPage} out of {totalPages} </h2>
           <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 ">    
   {movies.map((movie, index) => (
@@ -121,7 +124,18 @@ export default function Home({}) {
       
       {/* <div className="relative pb-[150%]"> */}
       <div className="relative">
-      <CardBody className="overflow-visible">
+      <Image
+            isZoomed
+              shadow="sm"
+              radius="lg"
+              width="100%"
+              // width="500"
+              // height="100"
+              alt={movie.title}
+              // className="w-full object-cover"
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            />
+      {/* <CardBody className="overflow-visible">
             <Image
             isZoomed
               shadow="sm"
@@ -133,7 +147,7 @@ export default function Home({}) {
               // className="w-full object-cover"
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             />
-          </CardBody>
+          </CardBody> */}
         {/* <img
           alt={movie.title} // Use movie title as alt text
           className="absolute inset-0 w-full h-full object-fill rounded-t-md"

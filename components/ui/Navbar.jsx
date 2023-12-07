@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popcorn } from 'lucide-react';
+import { Popcorn, Filter } from 'lucide-react';
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -75,7 +75,8 @@ export default function Navbar1() {
         </NavbarItem> */}
         <NavbarItem>
           <Button as={Link} color="primary" href="#" variant="outline">
-          Sign In
+          {/* <Filter className='mr-1'/> */}
+          Sign in
           </Button>
         </NavbarItem>
       </NavbarContent>
