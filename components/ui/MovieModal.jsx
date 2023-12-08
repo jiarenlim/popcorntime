@@ -19,7 +19,7 @@ export default function MovieModal({ movie, onClose }) {
   }, [movie]);
 
   return (
-    <Modal className="max-h-full overflow-y-auto"
+    <Modal className="max-h-[40rem] overflow-y-auto"
     
       backdrop="opaque" 
       isOpen={!!movie} 
@@ -33,8 +33,9 @@ export default function MovieModal({ movie, onClose }) {
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">{movie?.title}</ModalHeader>
         <ModalBody>
-          <p>{movie?.overview}</p>
-          <p>Release Date: {movie?.release_date}</p>
+          <p className="text-sm">{movie?.overview}</p>
+          <p className="text-sm">Release Date: {movie?.release_date}</p>
+          <p className="text-sm">Popularity: {movie?.popularity}</p>
           {/* <p>Score: {movie ? `${(movie.vote_average * 10).toFixed(0)}%` : 'N/A'}</p> */}
           <div className="flex justify-start">
           {/* <Chip
@@ -46,7 +47,7 @@ export default function MovieModal({ movie, onClose }) {
         >
           Score:
         </Chip> */}
-        <p className="mr-2">Score:</p>
+        <p className="mr-2 text-sm">Score:</p>
           <CircularProgress
           classNames={{
             svg: "w-12 h-12 drop-shadow-md ",
@@ -61,25 +62,30 @@ export default function MovieModal({ movie, onClose }) {
         </div>
          
           {/* Display cast with images */}
-             
           <div className="flex overflow-x-auto gap-4">
-            {movieDetails?.cast?.map((castMember, index) => (
-              <div key={index} style={{ flex: '0 0 auto', textAlign: 'center' }}>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w200/${castMember.profile_path}`}
-                  alt={castMember.name}
-                  width={150}
-                  height={200}
-                  fallbackSrc={`https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg`}
-                />
-                
-                 <p className="text-bold text-ellipsis">{castMember.name}</p>
-                 <p className="text-xs text-ellipsis">{castMember.character}</p>
-                 
-                {/* <p className="text-xs">{castMember.name}<br /> as {castMember.character}</p> */}
-              </div>
-            ))}
-          </div>
+  {movieDetails?.cast?.map((castMember, index) => (
+    <div
+      key={index}
+      style={{ flex: '0 0 auto', textAlign: 'center' }} // Center content horizontally
+    >
+      <Image
+        src={castMember.profile_path ? `https://image.tmdb.org/t/p/w200/${castMember.profile_path}` : `https://placehold.co/200x300?text=No\n Photo`}
+        alt={castMember.name}
+        width={100}
+        height={100}
+        // className=" h-auto" // Ensure image fits within the container
+        fallbackSrc={`https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg`}
+      />
+      <p className="text-sm sm:text-xs md:text-sm lg:text-xs xl:text-sm">
+        {castMember.name}
+      </p>
+      {/* <p className="text-xs sm:text-xxs md:text-xs lg:text-xxs xl:text-xs">
+        {castMember.character}
+      </p> */}
+    </div>
+  ))}
+</div>
+
 
 
           {/* Add more movie details as needed */}

@@ -1,18 +1,36 @@
 import React from 'react'
 import { Popcorn, Filter } from 'lucide-react';
 import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 import {  Navbar,   NavbarBrand,   NavbarContent,   NavbarItem,   NavbarMenuToggle,  NavbarMenu,  NavbarMenuItem} from "@nextui-org/react";
-
-export default function Navbar1() {
+import { fetchGenres } from '@/app/action';
+export default function Navbar1({ handleGenresChange }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [genres, setGenres] = React.useState([]);
+  const [selectedGenres, setSelectedGenres] = React.useState(new Set([""]));
+
+  React.useEffect(() => {
+    async function loadGenres() {
+      const fetchedGenres = await fetchGenres();
+      setGenres(fetchedGenres);
+    }
+    loadGenres();
+  }, []);
+
+
+  const handleGenresChangeNavBar = (selectedGenreIds) => {
+    setSelectedGenres(new Set(selectedGenreIds));
+    handleGenresChange(selectedGenreIds); // Call the function from props
+  };
+  
+
+  
   const menuItems = [
     "Most Popular",
     "Upcoming",
     "Genres",
     "Sign In",
+    
   ];
 
   return (
@@ -53,9 +71,9 @@ export default function Navbar1() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link className="text-white" color="foreground" href="#">
+          {/* <Link className="text-white" color="foreground" href="#">
            Upcoming
-          </Link>
+          </Link> */}
         </NavbarItem>
         <NavbarItem isActive>
           <Link  className="text-white" href="#" aria-current="page">
@@ -63,10 +81,10 @@ export default function Navbar1() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-white" color="foreground" href="#">
+          {/* <Link className="text-white" color="foreground" href="#">
           Genres
 
-          </Link>
+          </Link> */}
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
@@ -74,10 +92,33 @@ export default function Navbar1() {
           <Link href="#">Login</Link>
         </NavbarItem> */}
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="outline">
+          {/* <Button as={Link} color="primary" href="#" variant="outline"> */}
           {/* <Filter className='mr-1'/> */}
-          Sign in
-          </Button>
+          <Dropdown backdrop="blur">
+      <DropdownTrigger>
+        <Button 
+          variant="bordered" 
+          className="capitalize bg-red-500 border-red-900 border-large text-white text-xs"
+        >
+             <Filter size={20}/>Genres
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu 
+        aria-label="Multiple selection example"
+        variant="flat"
+        closeOnSelect={false}
+        disallowEmptySelection
+        selectionMode="multiple"
+        selectedKeys={selectedGenres}
+        // onSelectionChange={setSelectedGenres}
+        onSelectionChange={handleGenresChangeNavBar}
+      >
+        {genres.map((genre) => (
+      <DropdownItem key={genre.id}>{genre.name}</DropdownItem>
+    ))}
+      </DropdownMenu>
+    </Dropdown>
+          {/* </Button> */}
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className='bg-black text-white'>
