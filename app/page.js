@@ -302,7 +302,7 @@ const handleGenresChangePage = async (selectedGenreIds) => {
       <DropdownTrigger>
         <Button 
           variant="bordered" 
-          className="capitalize bg-red-500 border-red-900 border-large text-white text-xs"
+          className="capitalize bg-red-500 border-red-900 border-large ml-8 text-white text-xs"
         >
           Sort By: {selectedValue}
         </Button>
