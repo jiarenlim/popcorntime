@@ -398,7 +398,12 @@ const handleGenresChangePage = async (selectedGenreIds) => {
       <div className="p-4">
         <h2 className="text-lg font-semibold  text-slate-50">{movie.title}</h2> {/* Display movie title */}
         
-        <Badge className="mt-2 bg-slate-900 text-slate-200">{movie.release_date}</Badge> {/* Display release date */}
+        {/* <Badge className="mt-2 bg-slate-900 text-slate-200">{movie.release_date}</Badge> Display release date */}
+        {movie.release_date ? (
+  <Badge className="mt-2 bg-slate-900 text-slate-200 px-6 sm:px-17 md:px-17 lg:px-17 xl:px-17 mx-0 sm:mx-12 md:mx-12 lg:mx-12 xl:mx-auto">{movie.release_date}</Badge>
+) : (
+  <Badge className="mt-2 bg-slate-900 text-slate-200 px-2">No Release Date</Badge>
+)}
       </div>
       
     </Card>
