@@ -1,6 +1,7 @@
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import {Providers} from "./providers";
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 const poppins = Poppins({ subsets: ['latin'], weight:['400'] })
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <body className={poppins.className}>
       <Providers>
         {children}
+        <Analytics />
       </Providers>
       </body>
       {/* <body className={concert_One.className}>{children}</body> */}
